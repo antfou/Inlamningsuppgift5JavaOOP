@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="initial commit">
+    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="added packages and classes to master">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Client.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/ServerListener.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TicTacToe/ServerSideGame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TicTacToe/ServerSidePlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TicTacToe/TicTacToeClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TicTacToe/TicTacToeServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -9,7 +15,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -21,13 +40,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="Application.TicTacToeClient">
+    <configuration name="TicTacToeServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TicTacToe.TicTacToeServer" />
+      <module name="Inlamningsuppgift5JavaOOP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="TicTacToe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ServerListener" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.TicTacToeClient" />
+      <item itemvalue="Application.TicTacToeServer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TicTacToeClient" />
+        <item itemvalue="Application.TicTacToeServer" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -37,6 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1668759959653</updated>
       <workItem from="1668759961497" duration="971000" />
+      <workItem from="1668778554338" duration="322000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1668760270979</created>
