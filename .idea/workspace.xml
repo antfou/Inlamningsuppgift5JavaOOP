@@ -45,15 +45,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.PlayerClient">
-    <configuration name="GameServerClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="GameServerClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MultipleChoiceQuestion.Client.GameServerClient" />
       <module name="Inlamningsuppgift5JavaOOP" />
       <extension name="coverage">
@@ -72,6 +72,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ChattProgram.Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MultipleChoiceQuestion.Client.PlayerClient" />
+      <module name="Inlamningsuppgift5JavaOOP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="MultipleChoiceQuestion.Client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -106,8 +119,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ChattProgram.Client.Client" />
-      <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
@@ -122,7 +133,6 @@
         <item itemvalue="Application.PlayerClient" />
         <item itemvalue="Application.GameServerClient" />
         <item itemvalue="Application.MainServer" />
-        <item itemvalue="Application.ChattProgram.Client.Client" />
         <item itemvalue="Application.ServerListener12" />
       </list>
     </recent_temporary>
