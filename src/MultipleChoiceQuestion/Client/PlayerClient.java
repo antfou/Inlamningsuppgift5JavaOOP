@@ -44,7 +44,7 @@ public class PlayerClient extends JFrame implements ActionListener {
         }
         frame.getContentPane().add(messageLabel,"South");
 
-
+        boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(2,2,2,2));
         for(int i = 1; i <= 4; i++){
             final int j = i;
@@ -60,7 +60,6 @@ public class PlayerClient extends JFrame implements ActionListener {
             }
             frame.getContentPane().add(boardPanel,"Center");
         }
-
     }
 
     public void play(){

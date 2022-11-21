@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" afterDir="false" />
     </list>
@@ -138,7 +137,7 @@
       <updated>1668759959653</updated>
       <workItem from="1668759961497" duration="971000" />
       <workItem from="1668778554338" duration="662000" />
-      <workItem from="1669032630430" duration="1396000" />
+      <workItem from="1669032630430" duration="2068000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1668760270979</created>
@@ -167,7 +166,13 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1669031309236</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="Add TODO comment">
+      <created>1669034120413</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1669034120413</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +193,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="Added full &quot;TicTacToe&quot; game to project." />
     <MESSAGE value="Set &quot;area&quot; to not editable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Set &quot;area&quot; to not editable" />
+    <MESSAGE value="Add TODO comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add TODO comment" />
   </component>
 </project>
