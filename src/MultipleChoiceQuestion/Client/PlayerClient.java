@@ -30,6 +30,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     private Socket socket;
     private BufferedReader inputHandler;
     private PrintWriter outputHandler;
+    QuestionsAndAnswers questionsAndAnswers = new QuestionsAndAnswers();
 
     public PlayerClient(String serverAddress){
         try{
@@ -42,7 +43,10 @@ public class PlayerClient extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
         frame.getContentPane().add(messageLabel,"South");
-        setLabelText("FRÅGA");
+
+        //TODO label ska slumpa fram fråga från användarens valda kategori
+        //Bara för test nu.
+        setLabelText(questionsAndAnswers.sportQuestions());
 
         boardPanel = new JPanel();
         JPanel test = new JPanel();

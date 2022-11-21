@@ -137,7 +137,7 @@
       <updated>1668759959653</updated>
       <workItem from="1668759961497" duration="971000" />
       <workItem from="1668778554338" duration="662000" />
-      <workItem from="1669032630430" duration="2744000" />
+      <workItem from="1669032630430" duration="4024000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1668760270979</created>
@@ -178,7 +178,13 @@
       <option name="presentableId" value="LOCAL−00006" />
       <updated>1669034823783</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL−00007" summary="Add label for questions">
+      <created>1669035469994</created>
+      <option name="number" value="LOCAL−00007" />
+      <option name="presentableId" value="LOCAL−00007" />
+      <updated>1669035469994</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +206,7 @@
     <MESSAGE value="Added full &quot;TicTacToe&quot; game to project." />
     <MESSAGE value="Set &quot;area&quot; to not editable" />
     <MESSAGE value="Add TODO comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add TODO comment" />
+    <MESSAGE value="Add label for questions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add label for questions" />
   </component>
 </project>
