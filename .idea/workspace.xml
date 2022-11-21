@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Added full &quot;TicTacToe&quot; game to project.">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/TicTacToeClient.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ÖvnUppg12_Chatt/Client12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ÖvnUppg12_Chatt/Handler12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ÖvnUppg12_Chatt/MultiWriter12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ÖvnUppg12_Chatt/ServerListener12.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Added full &quot;TicTacToe&quot; game to project." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
