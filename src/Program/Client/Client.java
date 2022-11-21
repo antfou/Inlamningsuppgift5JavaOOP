@@ -31,6 +31,7 @@ public class Client extends JFrame implements ActionListener {
         add(panel);
         setVisible(true);
         pack();
+        area.setEditable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         textField.addActionListener(this);
 

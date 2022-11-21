@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Added full &quot;TicTacToe&quot; game to project." />
+    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Added full &quot;TicTacToe&quot; game to project.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Program/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Program/Client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +44,20 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.ServerListener">
+  <component name="RunManager" selected="Application.Program.Client.Client">
+    <configuration name="MainServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Program.Server.MainServer" />
+      <module name="Inlamningsuppgift5JavaOOP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Program.Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ServerListener12" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ÖvnUppg12_Chatt.ServerListener12" />
       <module name="Inlamningsuppgift5JavaOOP" />
@@ -68,14 +85,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
+      <item itemvalue="Application.Program.Client.Client" />
+      <item itemvalue="Application.MainServer" />
       <item itemvalue="Application.ServerListener12" />
       <item itemvalue="Application.TicTacToeServer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainServer" />
+        <item itemvalue="Application.Program.Client.Client" />
         <item itemvalue="Application.ServerListener12" />
         <item itemvalue="Application.TicTacToeClient" />
         <item itemvalue="Application.TicTacToeServer" />
