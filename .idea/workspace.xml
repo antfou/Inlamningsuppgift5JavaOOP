@@ -48,7 +48,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Client12">
+  <component name="RunManager" selected="Application.ServerListener">
     <configuration name="ServerListener12" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ÖvnUppg12_Chatt.ServerListener12" />
       <module name="Inlamningsuppgift5JavaOOP" />
@@ -79,13 +79,11 @@
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
-      <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener12" />
       <item itemvalue="Application.TicTacToeServer" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Client12" />
         <item itemvalue="Application.ServerListener12" />
         <item itemvalue="Application.TicTacToeClient" />
         <item itemvalue="Application.TicTacToeServer" />
