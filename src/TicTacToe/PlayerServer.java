@@ -12,9 +12,9 @@ import java.net.Socket;
  * streams. Since only text is being communicated we use a
  * reader and a writer.
  */
-class ServerSidePlayer extends Thread {
+class PlayerServer extends Thread {
     char mark;
-    ServerSidePlayer opponent;
+    PlayerServer opponent;
     Socket socket;
     BufferedReader input;
     PrintWriter output;
@@ -25,7 +25,7 @@ class ServerSidePlayer extends Thread {
      * initializes the stream fields, displays the first two
      * welcoming messages.
      */
-    public ServerSidePlayer(Socket socket, char mark, ServerSideGame game) {
+    public PlayerServer(Socket socket, char mark, ServerSideGame game) {
         this.socket = socket;
         this.mark = mark;
         this.game = game;
@@ -43,14 +43,14 @@ class ServerSidePlayer extends Thread {
     /**
      * Accepts notification of who the opponent is.
      */
-    public void setOpponent(ServerSidePlayer opponent) {
+    public void setOpponent(PlayerServer opponent) {
         this.opponent = opponent;
     }
 
     /**
      * Returns the opponent.
      */
-    public ServerSidePlayer getOpponent() {
+    public PlayerServer getOpponent() {
         return opponent;
     }
 

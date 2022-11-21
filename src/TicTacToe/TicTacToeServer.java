@@ -13,10 +13,10 @@ public class TicTacToeServer {
             while (true) {
                 ServerSideGame game = new ServerSideGame();
 
-                ServerSidePlayer playerX
-                        = new ServerSidePlayer(listener.accept(), 'X', game);
-                ServerSidePlayer playerO
-                        = new ServerSidePlayer(listener.accept(), 'O', game);
+                PlayerServer playerX
+                        = new PlayerServer(listener.accept(), 'X', game);
+                PlayerServer playerO
+                        = new PlayerServer(listener.accept(), 'O', game);
 
                 playerX.setOpponent(playerO);
                 playerO.setOpponent(playerX);

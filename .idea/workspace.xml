@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Added full &quot;TicTacToe&quot; game to project.">
+    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Set &quot;area&quot; to not editable">
+      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/GameServerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Server/GameServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Server/PlayerServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Program/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Program/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Program/Server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/MainServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Program/Server/MultiUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/MultiUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Program/Server/ThreadServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/ThreadServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TicTacToe/ServerSideGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/ServerSideGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TicTacToe/ServerSidePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/PlayerServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TicTacToe/TicTacToeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/TicTacToeServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,21 +45,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false"
   }
-}</component>
-  <component name="RunManager" selected="Application.Program.Client.Client">
-    <configuration name="MainServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Program.Server.MainServer" />
+}]]></component>
+  <component name="RunManager" selected="Application.PlayerClient">
+    <configuration name="GameServerClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MultipleChoiceQuestion.Client.GameServerClient" />
       <module name="Inlamningsuppgift5JavaOOP" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Program.Server.*" />
+          <option name="PATTERN" value="MultipleChoiceQuestion.Client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MainServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ChattProgram.Server.MainServer" />
+      <module name="Inlamningsuppgift5JavaOOP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ChattProgram.Server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -85,22 +106,24 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ChattProgram.Client.Client" />
       <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
-      <item itemvalue="Application.Program.Client.Client" />
+      <item itemvalue="Application.PlayerClient" />
+      <item itemvalue="Application.GameServerClient" />
       <item itemvalue="Application.MainServer" />
       <item itemvalue="Application.ServerListener12" />
       <item itemvalue="Application.TicTacToeServer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PlayerClient" />
+        <item itemvalue="Application.GameServerClient" />
         <item itemvalue="Application.MainServer" />
-        <item itemvalue="Application.Program.Client.Client" />
+        <item itemvalue="Application.ChattProgram.Client.Client" />
         <item itemvalue="Application.ServerListener12" />
-        <item itemvalue="Application.TicTacToeClient" />
-        <item itemvalue="Application.TicTacToeServer" />
       </list>
     </recent_temporary>
   </component>
@@ -129,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668778924343</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Set &quot;area&quot; to not editable">
+      <created>1669022494917</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669022494917</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +179,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="Added full &quot;TicTacToe&quot; game to project." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added full &quot;TicTacToe&quot; game to project." />
+    <MESSAGE value="Set &quot;area&quot; to not editable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Set &quot;area&quot; to not editable" />
   </component>
 </project>

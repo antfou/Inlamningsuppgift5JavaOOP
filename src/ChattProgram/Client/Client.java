@@ -1,4 +1,4 @@
-package Program.Client;
+package ChattProgram.Client;
 
 import javax.swing.*;
 import java.awt.*;

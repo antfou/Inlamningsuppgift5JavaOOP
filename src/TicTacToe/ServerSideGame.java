@@ -9,7 +9,7 @@ class ServerSideGame {
      * otherwise the array cell stores a reference to the player that
      * owns it.
      */
-    private ServerSidePlayer[] board = {
+    private PlayerServer[] board = {
             null, null, null,
             null, null, null,
             null, null, null};
@@ -17,7 +17,7 @@ class ServerSideGame {
     /**
      * The current player.
      */
-    ServerSidePlayer currentPlayer;
+    PlayerServer currentPlayer;
 
     /**
      * Returns whether the current state of the board is such that one
@@ -57,7 +57,7 @@ class ServerSideGame {
      * the other player is notified of the move so it can update its
      * client.
      */
-    public synchronized boolean legalMove(int location, ServerSidePlayer player) {
+    public synchronized boolean legalMove(int location, PlayerServer player) {
         if (player == currentPlayer && board[location] == null) {
             board[location] = currentPlayer;
             currentPlayer = currentPlayer.getOpponent();
