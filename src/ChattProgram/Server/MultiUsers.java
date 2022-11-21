@@ -1,4 +1,4 @@
-package Program.Server;
+package ChattProgram.Server;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
