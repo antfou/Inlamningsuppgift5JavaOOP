@@ -109,6 +109,8 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.ChattProgram.Client.Client" />
+      <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
