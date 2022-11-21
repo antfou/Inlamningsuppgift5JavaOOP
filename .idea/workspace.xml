@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="Set &quot;area&quot; to not editable">
-      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/GameServerClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Server/GameServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Server/PlayerServer.java" afterDir="false" />
+    <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/MainServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Server/MultiUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/MultiUsers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Program/Server/ThreadServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ChattProgram/Server/ThreadServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TicTacToe/ServerSideGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/ServerSideGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TicTacToe/ServerSidePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/PlayerServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TicTacToe/TicTacToeServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicTacToe/TicTacToeServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +138,7 @@
       <updated>1668759959653</updated>
       <workItem from="1668759961497" duration="971000" />
       <workItem from="1668778554338" duration="662000" />
+      <workItem from="1669032630430" duration="1396000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1668760270979</created>
@@ -169,7 +161,13 @@
       <option name="project" value="LOCAL" />
       <updated>1669022494917</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="Set &quot;area&quot; to not editable">
+      <created>1669031309236</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1669031309236</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

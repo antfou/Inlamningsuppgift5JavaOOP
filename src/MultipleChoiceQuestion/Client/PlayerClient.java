@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class PlayerClient implements ActionListener {
+public class PlayerClient extends JFrame implements ActionListener {
     String userName;
-
-    //Lägg in faktiska frågor istället för message.
+    //TODO Lägg till fält (label) för fråga
+    //TODO Lägg in faktiska svar istället för message.
     private String message1 = "1";
     private String message2 =  "2";
     private String message3 = "3";
@@ -44,7 +44,7 @@ public class PlayerClient implements ActionListener {
         }
         frame.getContentPane().add(messageLabel,"South");
 
-        boardPanel = new JPanel();
+
         boardPanel.setLayout(new GridLayout(2,2,2,2));
         for(int i = 1; i <= 4; i++){
             final int j = i;
@@ -60,6 +60,7 @@ public class PlayerClient implements ActionListener {
             }
             frame.getContentPane().add(boardPanel,"Center");
         }
+
     }
 
     public void play(){
