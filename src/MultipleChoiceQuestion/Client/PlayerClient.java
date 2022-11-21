@@ -12,7 +12,6 @@ import java.net.Socket;
 
 public class PlayerClient extends JFrame implements ActionListener {
     String userName;
-    //TODO Lägg till fält (label) för fråga
     //TODO Lägg in faktiska svar istället för message.
     private String message1 = "1";
     private String message2 =  "2";
@@ -43,8 +42,11 @@ public class PlayerClient extends JFrame implements ActionListener {
             throw new RuntimeException(e);
         }
         frame.getContentPane().add(messageLabel,"South");
+        setLabelText("FRÅGA");
 
         boardPanel = new JPanel();
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(0,1));
         boardPanel.setLayout(new GridLayout(2,2,2,2));
         for(int i = 1; i <= 4; i++){
             final int j = i;
@@ -58,7 +60,9 @@ public class PlayerClient extends JFrame implements ActionListener {
                 case 4: boardPanel.add(button4);
                     button4.addActionListener( this);
             }
-            frame.getContentPane().add(boardPanel,"Center");
+            test.add(messageLabel);
+            test.add(boardPanel);
+            frame.getContentPane().add(test,"Center");
         }
     }
 
@@ -73,17 +77,17 @@ public class PlayerClient extends JFrame implements ActionListener {
             while(true){
                 serverResponse = inputHandler.readLine();
                 if (serverResponse.startsWith("KORREKT")){
-                    messageLabel.setText("Rätt svar! Bra jobbat");
+                    setLabelText("Rätt svar! Bra jobbat");
                 }else if(serverResponse.startsWith("INKORREKT")){
-                    messageLabel.setText("Fel svar!");
+                    setLabelText("Fel svar!");
                 }else if(serverResponse.startsWith("VINST")){
-                    messageLabel.setText("GRATTIS! DU VANN");
+                    setLabelText("GRATTIS! DU VANN");
                     break;
                 }else if(serverResponse.startsWith("FÖRLUST")){
-                    messageLabel.setText("Du förlorade.");
+                    setLabelText("Du förlorade.");
                     break;
                 }else if(serverResponse.startsWith("OAVGJORT")){
-                    messageLabel.setText("Oavgjort");
+                    setLabelText("Oavgjort");
                     break;
                 }else if(serverResponse.startsWith("START")){
                     JOptionPane.showMessageDialog(null,
