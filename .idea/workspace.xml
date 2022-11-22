@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb2175fd-4595-4ae8-8915-b32e65a3b941" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MultipleChoiceQuestion/Client/PlayerClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Feature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,6 +41,11 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\abdul\OneDrive\Desktop\nackademin-uppgifter\Inlamningsuppgift5JavaOOP\src\MultipleChoiceQuestion" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.PlayerClient">
     <configuration name="GameServerClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MultipleChoiceQuestion.Client.GameServerClient" />
@@ -109,8 +113,6 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ChattProgram.Client.Client" />
-      <item itemvalue="Application.Client12" />
       <item itemvalue="Application.ServerListener" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.TicTacToeClient" />
