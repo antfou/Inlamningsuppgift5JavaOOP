@@ -1,23 +1,31 @@
 package MultipleChoiceQuestion.Server;
 
 import MultipleChoiceQuestion.ClassesAndLogic.Answer;
+import MultipleChoiceQuestion.ClassesAndLogic.Database;
+import MultipleChoiceQuestion.ClassesAndLogic.Player;
 
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
 public class PlayerServer extends Thread{
+    Database db;
     String name;
     GameServer game;
     PlayerServer opponent;
     Socket socket;
     ObjectInputStream inputHandler;
     ObjectOutputStream outputHandler;
-    public PlayerServer(Socket socket, GameServer game) throws IOException {
+    public PlayerServer(Socket socket, GameServer game,Database db) throws IOException {
+        this.db = db;
         System.out.println("PlayerServer är igång");
         this.game = game;
         this.socket = socket;
         name = JOptionPane.showInputDialog("Vem vill spela?");
+        this.db.addPlayerToList(new Player(name));
+        for (Player p : db.getListOfPlayers()) {
+            System.out.println(p.getUserName());
+        }
         outputHandler = new ObjectOutputStream(socket.getOutputStream());
         inputHandler = new ObjectInputStream(socket.getInputStream());
             outputHandler.writeObject("WELCOME " + name);
