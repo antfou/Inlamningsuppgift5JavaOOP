@@ -1,43 +1,35 @@
 package MultipleChoiceQuestion.Client;
 
+import MultipleChoiceQuestion.ClassesAndLogic.Question;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class PlayerClient extends JFrame implements ActionListener {
     String userName;
-    //TODO Lägg in faktiska svar istället för message.
-    private String message1 = "1";
-    private String message2 =  "2";
-    private String message3 = "3";
-    private String message4 = "4";
-
     private JFrame frame = new JFrame("QUIZ");
     JPanel boardPanel;
     private JLabel messageLabel = new JLabel("");
-    private JButton button1 = new JButton(message1);
-    private JButton button2 = new JButton(message2);
-    private JButton button3 = new JButton(message3);
-    private JButton button4 = new JButton(message4);
+    private JButton button1 = new JButton();
+    private JButton button2 = new JButton();
+    private JButton button3 = new JButton();
+    private JButton button4 = new JButton();
 
     private static int PORT = 9123;
     private Socket socket;
-    private BufferedReader inputHandler;
-    private PrintWriter outputHandler;
-    QuestionsAndAnswers questionsAndAnswers = new QuestionsAndAnswers();
-
-    public PlayerClient(String serverAddress){
+    private ObjectInputStream inputHandler;
+    private ObjectOutputStream outputHandler;
+    Question question;
+    public PlayerClient(String serverAddress, Question question){
+        this.question = question;
         try{
             socket = new Socket(serverAddress, PORT);
-            inputHandler = new BufferedReader(new InputStreamReader(
-                    socket.getInputStream()));
-            outputHandler = new PrintWriter(socket.getOutputStream(), true);
+            outputHandler = new ObjectOutputStream(socket.getOutputStream());
+            inputHandler = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -46,8 +38,11 @@ public class PlayerClient extends JFrame implements ActionListener {
 
         //TODO label ska slumpa fram fråga från användarens valda kategori
         //Bara för test nu.
-        setLabelText(questionsAndAnswers.sportQuestions());
-
+        setLabelText(question.getQuestionText());
+        button1.setText(question.getAnswerList().get(0).getAnswerText());
+        button2.setText(question.getAnswerList().get(1).getAnswerText());
+        button3.setText(question.getAnswerList().get(2).getAnswerText());
+        button4.setText(question.getAnswerList().get(3).getAnswerText());
         boardPanel = new JPanel();
         JPanel test = new JPanel();
         test.setLayout(new GridLayout(0,1));
@@ -70,36 +65,47 @@ public class PlayerClient extends JFrame implements ActionListener {
         }
     }
 
-    public void play(){
-        String serverResponse;
+    public void play() throws IOException{
+        Object serverResponse;
         try{
-            serverResponse = inputHandler.readLine();
-            if(serverResponse.startsWith("WELCOME")) {
-                userName = serverResponse.substring(8);
-                frame.setTitle("Spelare: " + userName);
-            }
-            while(true){
-                serverResponse = inputHandler.readLine();
-                if (serverResponse.startsWith("KORREKT")){
-                    setLabelText("Rätt svar! Bra jobbat");
-                }else if(serverResponse.startsWith("INKORREKT")){
-                    setLabelText("Fel svar!");
-                }else if(serverResponse.startsWith("VINST")){
-                    setLabelText("GRATTIS! DU VANN");
-                    break;
-                }else if(serverResponse.startsWith("FÖRLUST")){
-                    setLabelText("Du förlorade.");
-                    break;
-                }else if(serverResponse.startsWith("OAVGJORT")){
-                    setLabelText("Oavgjort");
-                    break;
-                }else if(serverResponse.startsWith("START")){
-                    JOptionPane.showMessageDialog(null,
-                            "Hittat motståndare, snart börjar matchen.");
+            /*serverResponse = inputHandler.readObject();
+
+            if (serverResponse instanceof String stringResponse){
+                System.out.println("client reading "+stringResponse);
+                if(stringResponse.startsWith("WELCOME")) {
+                    userName = stringResponse.substring(8);
+                    frame.setTitle("Spelare: " + userName);
                 }
+            }*/
+            while(true) {
+                serverResponse = inputHandler.readObject();
+                if (serverResponse instanceof String stringResponse) {
+                    System.out.println("client reading "+stringResponse);
+                    if(stringResponse.startsWith("WELCOME")) {
+                        userName = stringResponse.substring(8);
+                        frame.setTitle("Spelare: " + userName);
+                    }
+                    else if (stringResponse.startsWith("KORREKT")) {
+                        setLabelText("Rätt svar! Bra jobbat");
+                    } else if (stringResponse.startsWith("INKORREKT")) {
+                        setLabelText("Fel svar!");
+                    } else if (stringResponse.startsWith("VINST")) {
+                        setLabelText("GRATTIS! DU VANN");
+                        break;
+                    } else if (stringResponse.startsWith("FÖRLUST")) {
+                        setLabelText("Du förlorade.");
+                        break;
+                    } else if (stringResponse.startsWith("OAVGJORT")) {
+                        setLabelText("Oavgjort");
+                        break;
+                    } else if (stringResponse.startsWith("START")) {
+                        JOptionPane.showMessageDialog(null,
+                                "Hittat motståndare, snart börjar matchen.");
+                    }
+                }//TODO: Lista ut vad du vill göra med detta.
+                //outputHandler.writeObject("AVSLUT");
             }
-            outputHandler.println("AVSLUT");
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -120,28 +126,32 @@ public class PlayerClient extends JFrame implements ActionListener {
         frame.dispose();
         return userResponse == JOptionPane.YES_OPTION;
     }
-
     public void setLabelText(String string){
         messageLabel.setText(string);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
+        try {
         if(e.getSource() == button1){
-            outputHandler.println("BUTTON 1");
+                outputHandler.writeObject(question.getAnswerList().get(0));
         }else if(e.getSource() == button2){
-            outputHandler.println("BUTTON 2");
+            outputHandler.writeObject(question.getAnswerList().get(1));
         }else if(e.getSource() == button3){
-            outputHandler.println("BUTTON 3");
+            outputHandler.writeObject(question.getAnswerList().get(2));
         }else if(e.getSource() == button4){
-            outputHandler.println("BUTTON 4");
+            outputHandler.writeObject(question.getAnswerList().get(3));
+        } } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         while (true){
+            System.out.println("Client är igång");
+            Question question = new Question("Vad är Sveriges huvudstad?","Göteborg","Malmö","" +
+                    "Sälen", "Stockholm");
             String serverAddress = (args.length == 0) ? "localhost" : args[1];
-            PlayerClient playerClient = new PlayerClient(serverAddress);
+            PlayerClient playerClient = new PlayerClient(serverAddress, question);
             playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             playerClient.frame.setSize(400, 200);
             playerClient.frame.setVisible(true);

@@ -1,79 +1,71 @@
 package MultipleChoiceQuestion.Server;
 
+import MultipleChoiceQuestion.ClassesAndLogic.Answer;
+
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
 public class PlayerServer extends Thread{
-    //Might not need mark.
     String name;
     GameServer game;
     PlayerServer opponent;
     Socket socket;
-    BufferedReader inputHandler;
-    PrintWriter outputHandler;
-
-    public PlayerServer(Socket socket, GameServer game){
+    ObjectInputStream inputHandler;
+    ObjectOutputStream outputHandler;
+    public PlayerServer(Socket socket, GameServer game) throws IOException {
+        System.out.println("PlayerServer är igång");
         this.game = game;
         this.socket = socket;
         name = JOptionPane.showInputDialog("Vem vill spela?");
-        try{inputHandler = new BufferedReader(
-                new InputStreamReader(socket.getInputStream()));
-            outputHandler = new PrintWriter(socket.getOutputStream(), true);
-            outputHandler.println("WELCOME " + name);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        outputHandler = new ObjectOutputStream(socket.getOutputStream());
+        inputHandler = new ObjectInputStream(socket.getInputStream());
+            outputHandler.writeObject("WELCOME " + name);
         }
-    }
+
     public void setOpponent (PlayerServer opponent){this.opponent = opponent;}
 
     public PlayerServer getOpponent(){return opponent;}
 
-    public void otherPlayerAction(String buttonClicked){
-        outputHandler.println("OPPONENT_ACTION " + buttonClicked);
-
+    public void otherPlayerAction(String buttonClicked) throws IOException{
+        outputHandler.writeObject("OPPONENT_ACTION " + buttonClicked);
         if(game.hasWinner()){
-            outputHandler.println("FÖRLUST");
+            outputHandler.writeObject("FÖRLUST");
         }else if(game.isTie()){
-            outputHandler.println("OAVGJORT");
+            outputHandler.writeObject("OAVGJORT");
         }
     }
 
     public void run(){
         try{
-            outputHandler.println("START");
+            System.out.println("före skickar start");
+            outputHandler.writeObject("START");
+            System.out.println("har skickar start");
             while(true){
-                String userCommand = inputHandler.readLine();
-                boolean isCorrect = false;
-                if(userCommand.startsWith("BUTTON")){
-                    if (userCommand.contains("1")){
-                        isCorrect = game.isCorrect(1);
-                    }else if(userCommand.contains("2")){
-                        isCorrect = game.isCorrect(2);
-                    }else if(userCommand.contains("3")){
-                        isCorrect = game.isCorrect(3);
-                    }else if(userCommand.contains("4")){
-                        isCorrect = game.isCorrect(4);
-                    }
-                    if(isCorrect){
-                        outputHandler.println("KORREKT");
-                    }else{
-                        outputHandler.println("INKORREKT");
+                Object userCommand = inputHandler.readObject();
+                System.out.println("userCommand "+userCommand);
+                //boolean isCorrect = false;
+                if(userCommand instanceof Answer clickedAnswer){
+                    if (clickedAnswer.checkIfCorrect()){
+                        outputHandler.writeObject("KORREKT");
+                    }else {
+                        outputHandler.writeObject("INKORREKT");
                     }
                     if(game.hasWinner()){
-                        outputHandler.println("VINST");
+                        outputHandler.writeObject("VINST");
                     }else if(game.isTie()){
-                        outputHandler.println("OAVGJORT");
+                        outputHandler.writeObject("OAVGJORT");
                     }
                 }else if(userCommand.equals("AVSLUT")){
                     return;
-                    //System.exit(0);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        }finally {
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
             try {
                 socket.close();
             } catch (IOException e) {
