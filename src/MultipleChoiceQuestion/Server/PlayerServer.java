@@ -52,12 +52,11 @@ public class PlayerServer extends Thread{
             outputHandler.writeObject("START");
             System.out.println("har skickar start");
             Object userCommand;
-            while(inputHandler.readObject() !=null){
+            while(true){
                  userCommand = inputHandler.readObject();
                 System.out.println("userCommand "+userCommand);
                 //boolean isCorrect = false;
                 if(userCommand instanceof Answer clickedAnswer){
-                    System.out.println("HEJ" + clickedAnswer.getAnswerText());
                     if (clickedAnswer.checkIfCorrect()){
                         outputHandler.writeObject("KORREKT");
                     }else if (!( clickedAnswer).checkIfCorrect()){
