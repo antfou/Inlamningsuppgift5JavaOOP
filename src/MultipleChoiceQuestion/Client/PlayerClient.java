@@ -1,6 +1,7 @@
 package MultipleChoiceQuestion.Client;
 //Feature Branch
 
+import MultipleChoiceQuestion.ClassesAndLogic.Database;
 import MultipleChoiceQuestion.ClassesAndLogic.Question;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 public class PlayerClient extends JFrame implements ActionListener {
     String userName;
+    Database db;
     private JButton newGame = new JButton("NYTT SPEL");
     private JButton giveUp = new JButton("Ge upp");
     private JFrame frame = new JFrame("QUIZ");
@@ -24,6 +26,8 @@ public class PlayerClient extends JFrame implements ActionListener {
     private JButton button2 = new JButton();
     private JButton button3 = new JButton();
     private JButton button4 = new JButton();
+    private JButton findPlayerButton = new JButton("hitta spelare");
+    private JButton randomPlayerButton = new JButton("slumpa spelare");
     private static int PORT = 9123;
     private Socket socket;
     private ObjectInputStream inputHandler;
@@ -112,6 +116,9 @@ public class PlayerClient extends JFrame implements ActionListener {
 
     void chooseCategory(){
         mainPanel.remove(newGame);
+        mainPanel.remove(findPlayerButton);
+        mainPanel.remove(randomPlayerButton);
+        mainPanel.repaint();
         setLabelText("Välj kategori");
         categories = questionsAndAnswers.listOfCategories();
         mainPanel.setLayout(new GridLayout(4,1));
@@ -125,6 +132,22 @@ public class PlayerClient extends JFrame implements ActionListener {
         mainPanel.add(categories.get(0));
         mainPanel.add(categories.get(1));
         mainPanel.add(categories.get(2));
+    }
+
+    void chooseRandomPlayerOrFindPlayer(){
+        mainPanel.remove(newGame);
+        mainPanel.repaint();
+        setLabelText("");
+        mainPanel.setLayout(new FlowLayout());
+        mainPanel.add(findPlayerButton);
+        mainPanel.add(randomPlayerButton);
+        findPlayerButton.addActionListener(this);
+        randomPlayerButton.addActionListener(this);
+
+    }
+
+    void findPlayerButtonPressed(){
+        System.out.println();
     }
 
     public void play() throws IOException{
@@ -199,7 +222,14 @@ public class PlayerClient extends JFrame implements ActionListener {
             throw new RuntimeException(ex);
         }
         if (e.getSource() == newGame) {
+            chooseRandomPlayerOrFindPlayer();
+            //chooseCategory();
+        }
+        if (e.getSource() == randomPlayerButton){
             chooseCategory();
+        }
+        if (e.getSource() == findPlayerButton){
+            findPlayerButtonPressed();
         }
         for (JButton button : categories) {
             if (e.getSource() == button) {
