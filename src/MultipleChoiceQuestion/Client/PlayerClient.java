@@ -81,19 +81,27 @@ public class PlayerClient extends JFrame implements ActionListener {
         button4.setText(question.getAnswerList().get(3).getAnswerText());
         for(int i = 1; i <= 4; i++){
             final int j = i;
-            switch (i){
-                case 1: boardPanel.add(button1);
+            switch (i) {
+                case 1 -> {
+                    boardPanel.add(button1);
                     button1.setBackground(Color.ORANGE);
-                    button1.addActionListener( this);
-                case 2: boardPanel.add(button2);
+                    button1.addActionListener(this);
+                }
+                case 2 -> {
+                    boardPanel.add(button2);
                     button2.setBackground(Color.ORANGE);
-                    button2.addActionListener( this);
-                case 3: boardPanel.add(button3);
+                    button2.addActionListener(this);
+                }
+                case 3 -> {
+                    boardPanel.add(button3);
                     button3.setBackground(Color.ORANGE);
-                    button3.addActionListener( this);
-                case 4: boardPanel.add(button4);
+                    button3.addActionListener(this);
+                }
+                case 4 -> {
+                    boardPanel.add(button4);
                     button4.setBackground(Color.ORANGE);
-                    button4.addActionListener( this);
+                    button4.addActionListener(this);
+                }
             }
             mainPanel.add(messageLabel);
             mainPanel.add(boardPanel);
@@ -167,7 +175,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     private boolean rematch(){
         int userResponse = JOptionPane.showConfirmDialog(frame,
                 "Vill du spela en till?",
-                "Quiz Kampen",JOptionPane.YES_NO_OPTION);
+                "Quizkampen",JOptionPane.YES_NO_OPTION);
         frame.dispose();
         return userResponse == JOptionPane.YES_OPTION;
     }

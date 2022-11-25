@@ -4,6 +4,7 @@ package MultipleChoiceQuestion.Server;
 import MultipleChoiceQuestion.ClassesAndLogic.Answer;
 import MultipleChoiceQuestion.ClassesAndLogic.Database;
 import MultipleChoiceQuestion.ClassesAndLogic.Player;
+import MultipleChoiceQuestion.Client.GameServerClient;
 
 import javax.swing.*;
 import java.io.*;
@@ -50,14 +51,16 @@ public class PlayerServer extends Thread{
             System.out.println("före skickar start");
             outputHandler.writeObject("START");
             System.out.println("har skickar start");
-            while(true){
-                Object userCommand = inputHandler.readObject();
+            Object userCommand;
+            while(inputHandler.readObject() !=null){
+                 userCommand = inputHandler.readObject();
                 System.out.println("userCommand "+userCommand);
                 //boolean isCorrect = false;
                 if(userCommand instanceof Answer clickedAnswer){
+                    System.out.println("HEJ" + clickedAnswer.getAnswerText());
                     if (clickedAnswer.checkIfCorrect()){
                         outputHandler.writeObject("KORREKT");
-                    }else {
+                    }else if (!( clickedAnswer).checkIfCorrect()){
                         outputHandler.writeObject("INKORREKT");
                     }
                     if(game.hasWinner()){
