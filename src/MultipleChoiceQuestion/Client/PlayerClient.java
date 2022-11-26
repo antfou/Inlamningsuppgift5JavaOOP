@@ -2,6 +2,7 @@ package MultipleChoiceQuestion.Client;
 //Feature Branch
 
 import MultipleChoiceQuestion.ClassesAndLogic.Database;
+import MultipleChoiceQuestion.ClassesAndLogic.Player;
 import MultipleChoiceQuestion.ClassesAndLogic.Question;
 
 import javax.swing.*;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 
 public class PlayerClient extends JFrame implements ActionListener {
     String userName;
-    Database db;
     private JButton newGame = new JButton("NYTT SPEL");
     private JButton giveUp = new JButton("Ge upp");
     private JFrame frame = new JFrame("QUIZ");
@@ -163,6 +163,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                     }
                     else if (stringResponse.startsWith("KORREKT")) {
                         setLabelText("Rätt svar! Bra jobbat");
+
                     } else if (stringResponse.startsWith("INKORREKT")) {
                         setLabelText("Fel svar!");
                     } else if (stringResponse.startsWith("VINST")) {

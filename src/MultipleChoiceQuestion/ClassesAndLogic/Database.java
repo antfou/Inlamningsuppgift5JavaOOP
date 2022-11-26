@@ -8,7 +8,7 @@ public class Database {
     private final ArrayList<Player> playerNameList = new ArrayList<>();
 
     public void addPlayerToList(Player player) {
-        playerNameList.add(new Player(player.getUserName()));
+        playerNameList.add(new Player(player.getUserName(),0));
         //Ska vara utkommenterat tills vidare.
         /*File file = new File("src/MultipleChoiceQuestion/Server/Database/PlayerList.txt");    //Om vi vill ha en login
         try {

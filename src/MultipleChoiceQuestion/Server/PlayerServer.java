@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class PlayerServer extends Thread{
+
     Database db;
     String name;
     GameServer game;
@@ -24,9 +25,9 @@ public class PlayerServer extends Thread{
         this.game = game;
         this.socket = socket;
         name = JOptionPane.showInputDialog("Vem vill spela?");
-        this.db.addPlayerToList(new Player(name));
+        this.db.addPlayerToList(new Player(name,0));
         for (Player p : db.getListOfPlayers()) {
-            System.out.println(p.getUserName());
+            System.out.println(p.getUserName() + p.getScore());
         }
         outputHandler = new ObjectOutputStream(socket.getOutputStream());
         inputHandler = new ObjectInputStream(socket.getInputStream());
