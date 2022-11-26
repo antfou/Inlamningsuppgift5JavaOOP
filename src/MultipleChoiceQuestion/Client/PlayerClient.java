@@ -3,6 +3,7 @@ package MultipleChoiceQuestion.Client;
 
 import MultipleChoiceQuestion.ClassesAndLogic.Database;
 import MultipleChoiceQuestion.ClassesAndLogic.Question;
+import MultipleChoiceQuestion.ClassesAndLogic.QuestionsAndAnswers;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class PlayerClient extends JFrame implements ActionListener {
     String userName;
     Database db;
+    String currentCategory;
     private JButton newGame = new JButton("NYTT SPEL");
     private JButton giveUp = new JButton("Ge upp");
     private JFrame frame = new JFrame("QUIZ");
@@ -38,7 +40,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     Color purple = new Color(178,102,255);
     Color button = new Color(0,204,0);
     Question question;
-    public PlayerClient(String serverAddress, Question question){
+    public PlayerClient(String serverAddress){
         this.question = question;
         try{
             socket = new Socket(serverAddress, PORT);
@@ -68,6 +70,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     }
 
     public void gameState(){
+        question = questionsAndAnswers.getQuestion(currentCategory);
         mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(0,5));
@@ -234,17 +237,20 @@ public class PlayerClient extends JFrame implements ActionListener {
         for (JButton button : categories) {
             if (e.getSource() == button) {
                 if (button.getText().equals("Sport")) {
-                    //Kod
+                    currentCategory = "Sport";
                     gameState();
                 } else if (button.getText().equals("Historia")) {
-                    //Kod
-                } else if (button.getText().equals("Matematik")) {
-                    //Kod
+                    currentCategory = "Historia";
+                    gameState();
+                } else if (button.getText().equals("Film")) {
+                    currentCategory = "Film";
+                    gameState();
                 } else if (button.getText().equals("Människokroppen")) {
-                    //Kod
+                    currentCategory = "Människokroppen";
+                    gameState();
                 } else {
-                    //Kod
-                    //Kategori Java
+                    currentCategory = "Java";
+                    gameState();
                 }
             }
         }
@@ -263,13 +269,16 @@ public class PlayerClient extends JFrame implements ActionListener {
             }
         }
     }
+    public String getCurrentCategory(){
+        return currentCategory;
+    }
     public static void main(String[] args) throws IOException {
         while (true){
             System.out.println("Client är igång");
             Question question = new Question("Vad är Sveriges huvudstad?","Göteborg","Malmö","" +
                     "Sälen", "Stockholm");
             String serverAddress = (args.length == 0) ? "localhost" : args[1];
-            PlayerClient playerClient = new PlayerClient(serverAddress, question);
+            PlayerClient playerClient = new PlayerClient(serverAddress);
             playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             playerClient.frame.setSize(400, 200);
             playerClient.frame.setVisible(true);
