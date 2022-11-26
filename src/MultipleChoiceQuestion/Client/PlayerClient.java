@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class PlayerClient extends JFrame implements ActionListener {
+    //TODO: Visa poäng för bägge spelare
     String userName;
     Database db;
     String currentCategory;

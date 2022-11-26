@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class QuestionsAndAnswers {
 
-    //TODO Gör att det är questionLists och gör en getcurrentquestion som använder getcurrentcategory för att hidda den
+    //TODO felsök erroret där de inte visar ifall man svarar rätt eller inte.
     Question question1;
     Question question2;
     String currentCategory;
