@@ -26,8 +26,8 @@ public class QuestionsAndAnswers {
             ArrayList<Question> sport = new ArrayList<>();
             sport.add(question1 = new Question("Vilket lag har färgerna svart och gul i sin logga?", sportAnswers1().get(0),
                     sportAnswers1().get(1), sportAnswers1().get(2), sportAnswers1().get(3)));
-            sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers1().get(0), sportAnswers1().get(1),
-                    sportAnswers1().get(2), sportAnswers1().get(3)));
+            sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers2().get(0), sportAnswers2().get(1),
+                    sportAnswers2().get(2), sportAnswers2().get(3)));
             shuffleList(sport);
             return sport;
         }
