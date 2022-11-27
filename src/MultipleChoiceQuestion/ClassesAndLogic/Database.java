@@ -1,6 +1,8 @@
 package MultipleChoiceQuestion.ClassesAndLogic;
 //Feature Branch
 
+import MultipleChoiceQuestion.Server.PlayerServer;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -8,7 +10,7 @@ public class Database {
     private final ArrayList<Player> playerNameList = new ArrayList<>();
 
     public void addPlayerToList(Player player) {
-        playerNameList.add(new Player(player.getUserName(),0));
+        playerNameList.add(new Player(player.getUserName()));
         //Ska vara utkommenterat tills vidare.
         /*File file = new File("src/MultipleChoiceQuestion/Server/Database/PlayerList.txt");    //Om vi vill ha en login
         try {
@@ -34,4 +36,6 @@ public class Database {
         }
         return playerFound;
     }
+
+
 }

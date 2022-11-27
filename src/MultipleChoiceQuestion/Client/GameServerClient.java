@@ -10,7 +10,6 @@ import java.net.ServerSocket;
 
 public class GameServerClient {
     Database db = new Database();
-
     public GameServerClient() throws IOException {
         ServerSocket listener = new ServerSocket(9123);
         System.out.println("Servern är igång");
@@ -18,11 +17,13 @@ public class GameServerClient {
             while (true){
                 GameServer game = new GameServer();
 
-                PlayerServer player1 = new PlayerServer(listener.accept(),game,db);
-                PlayerServer player2 = new PlayerServer(listener.accept(),game,db);
+                PlayerServer player1 = new PlayerServer(listener.accept(),game,db,1,0);
+                PlayerServer player2 = new PlayerServer(listener.accept(),game,db,2,0);
 
                 player1.setOpponent(player2);
                 player2.setOpponent(player1);
+                game.setCurrentPlayer(player1);
+
                 player1.start();
                 player2.start();
             }

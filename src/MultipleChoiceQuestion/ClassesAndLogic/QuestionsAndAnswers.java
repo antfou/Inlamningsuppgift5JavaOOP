@@ -67,10 +67,10 @@ public class QuestionsAndAnswers {
         }
         public ArrayList<String> historyAnswers2 () {
             ArrayList<String> answer = new ArrayList<>();
-            answer.add("Sköt sig själv");
             answer.add("Blev skjuten");
             answer.add("Hängde sig");
             answer.add("Förgiftade sig själv");
+            answer.add("Sköt sig själv");
             return answer;
         }
         public ArrayList<Question> movieQuestions () {
