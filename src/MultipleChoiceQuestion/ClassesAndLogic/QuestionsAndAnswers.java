@@ -26,8 +26,8 @@ public class QuestionsAndAnswers {
             ArrayList<Question> sport = new ArrayList<>();
             sport.add(question1 = new Question("Vilket lag har färgerna svart och gul i sin logga?", sportAnswers1().get(0),
                     sportAnswers1().get(1), sportAnswers1().get(2), sportAnswers1().get(3)));
-            sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers1().get(0), sportAnswers1().get(1),
-                    sportAnswers1().get(2), sportAnswers1().get(3)));
+            sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers2().get(0), sportAnswers2().get(1),
+                    sportAnswers2().get(2), sportAnswers2().get(3)));
             shuffleList(sport);
             return sport;
         }
@@ -67,10 +67,10 @@ public class QuestionsAndAnswers {
         }
         public ArrayList<String> historyAnswers2 () {
             ArrayList<String> answer = new ArrayList<>();
-            answer.add("Sköt sig själv");
             answer.add("Blev skjuten");
             answer.add("Hängde sig");
             answer.add("Förgiftade sig själv");
+            answer.add("Sköt sig själv");
             return answer;
         }
         public ArrayList<Question> movieQuestions () {
@@ -153,20 +153,19 @@ public class QuestionsAndAnswers {
         public void shuffleList (ArrayList list){
             Collections.shuffle(list);
         }
-        public Question getQuestion (String currentCategory){
+        public Question getQuestion (String currentCategory, int index){
             this.currentCategory = currentCategory;
             if (currentCategory.equals("Sport")) {
-                question1 = sportQuestions().get(0);
+                question1 = sportQuestions().get(index);
             } else if (currentCategory.equals("Historia")) {
-                question1 = historyQuestions().get(0);
+                question1 = historyQuestions().get(index);
             } else if (currentCategory.equals("Film")) {
-                question1 = movieQuestions().get(0);
+                question1 = movieQuestions().get(index);
             } else if (currentCategory.equals("Människokroppen")) {
-                question1 = humanBodyQuestions().get(0);
+                question1 = humanBodyQuestions().get(index);
             } else {
-                question1 = javaQuestions().get(0);
+                question1 = javaQuestions().get(index);
             }
             return question1;
         }
-    }
-
+}
