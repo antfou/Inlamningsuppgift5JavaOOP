@@ -2,8 +2,10 @@ package MultipleChoiceQuestion.Client;
 //Feature Branch
 
 import MultipleChoiceQuestion.ClassesAndLogic.Database;
+import MultipleChoiceQuestion.ClassesAndLogic.Player;
 import MultipleChoiceQuestion.ClassesAndLogic.Question;
 import MultipleChoiceQuestion.ClassesAndLogic.QuestionsAndAnswers;
+import MultipleChoiceQuestion.Server.PlayerServer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +31,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     private JButton button2 = new JButton();
     private JButton button3 = new JButton();
     private JButton button4 = new JButton();
+    private JButton[] buttons;
     private JButton findPlayerButton = new JButton("hitta spelare");
     private JButton randomPlayerButton = new JButton("slumpa spelare");
     private static int PORT = 9123;
@@ -151,7 +154,16 @@ public class PlayerClient extends JFrame implements ActionListener {
     }
 
     void findPlayerButtonPressed(){
-        System.out.println();
+
+        //buttons = new JButton[db.getListOfPlayers().size()];
+        mainPanel.remove(newGame);
+        mainPanel.repaint();
+        setLabelText("");
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i] = new JButton();
+            mainPanel.add(buttons[i]);
+        }
+
     }
 
     public void play() throws IOException{

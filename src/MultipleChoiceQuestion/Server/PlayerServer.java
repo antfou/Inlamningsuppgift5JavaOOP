@@ -9,8 +9,10 @@ import MultipleChoiceQuestion.Client.GameServerClient;
 import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class PlayerServer extends Thread{
+
     Database db;
     String name;
     GameServer game;
@@ -31,12 +33,13 @@ public class PlayerServer extends Thread{
         name = JOptionPane.showInputDialog("Vem vill spela?");
         this.db.addPlayerToList(new Player(name));
         for (Player p : db.getListOfPlayers()) {
-            System.out.println(p.getUserName());
+            System.out.println(p.getUserName() + " tillagd i listan 'online spelare'");
         }
         outputHandler = new ObjectOutputStream(socket.getOutputStream());
         inputHandler = new ObjectInputStream(socket.getInputStream());
             outputHandler.writeObject("WELCOME " + name);
         }
+
 
     public int scoreCounter(int player,String answer){
         if(player==1 && answer.equals("K")){
