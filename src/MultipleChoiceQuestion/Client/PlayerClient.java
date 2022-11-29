@@ -76,8 +76,14 @@ public class PlayerClient extends JFrame implements ActionListener {
     public void gameState() {
         if (counter < 2) {
             removeAll();
+            boardPanel.setBackground(background);
             hasClicked = false;
-            question = questionsAndAnswers.getQuestion(currentCategory,counter);
+            System.out.println("hämtar frågor, counter "+counter);
+            if(counter>0) {
+                question = questionsAndAnswers.getQuestion(currentCategory, counter, false);
+            }else{
+                question = questionsAndAnswers.getQuestion(currentCategory, counter, true);
+            }
             buttonPanel = new JPanel();
             buttonPanel.setLayout(new GridLayout(0, 5));
             buttonPanel.add(giveUp);
@@ -85,13 +91,18 @@ public class PlayerClient extends JFrame implements ActionListener {
             giveUp.setBackground(Color.white);
             buttonPanel.setBackground(background);
             setLabelText(question.getQuestionText());
+            System.out.println("Hämtat från databas: " + question.getQuestionText());
             boardPanel = new JPanel();
             mainPanel.setLayout(new GridLayout(0, 1));
             boardPanel.setLayout(new GridLayout(2, 2, 2, 2));
             button1.setText(question.getAnswerList().get(0).getAnswerText());
+            System.out.println("Hämtat från databas: " + question.getAnswerList().get(0).getAnswerText());
             button2.setText(question.getAnswerList().get(1).getAnswerText());
+            System.out.println("Hämtat från databas: " + question.getAnswerList().get(1).getAnswerText());
             button3.setText(question.getAnswerList().get(2).getAnswerText());
+            System.out.println("Hämtat från databas: " + question.getAnswerList().get(2).getAnswerText());
             button4.setText(question.getAnswerList().get(3).getAnswerText());
+            System.out.println("Hämtat från databas: " + question.getAnswerList().get(3).getAnswerText());
             for (int i = 1; i <= 4; i++) {
                 switch (i) {
                     case 1 -> {
@@ -125,8 +136,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                 frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
                 pack();
             }
-        }
-        else{
+        }else{
             System.out.println("Slut på frågor");
         }
     }
@@ -185,6 +195,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                             hasClicked = true;
                             colorButtons();
                             counter = counter +1;
+                            System.out.println("Counter är " + counter);
                             Thread.sleep(3000);
                             gameState();
                         } else if (stringResponse.startsWith("INKORREKT")) {
@@ -192,6 +203,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                             hasClicked = true;
                             colorButtons();
                             counter = counter +1;
+                            System.out.println("Counter är " + counter);
                             Thread.sleep(3000);
                             gameState();
                         } else if (stringResponse.startsWith("VINST")) {

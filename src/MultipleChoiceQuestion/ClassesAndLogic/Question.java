@@ -45,4 +45,10 @@ public class Question implements Serializable {
     public List<Answer> getAnswerList() {
         return answerList;
     }
+
+    /*public boolean isEmpty(Question question){
+        if(question.getQuestionText().isEmpty() || question.getAnswerList().get(0) == null){
+            return true;
+        }else{return false;}
+    }*/
 }
