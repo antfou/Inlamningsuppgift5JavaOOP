@@ -15,7 +15,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class PlayerClient extends JFrame implements ActionListener {
-    int counter = 0;
+    int questionsAnswered = 0;
+    int roundsPlayed = 0;
     String userName;
     Database db;
     boolean hasClicked = false;
@@ -74,16 +75,19 @@ public class PlayerClient extends JFrame implements ActionListener {
     }
 
     public void gameState() {
-        if (counter < 2) {
-            removeAll();
+        if(questionsAnswered > 0 || roundsPlayed > 0){
+            mainPanel.remove(messageLabel);
+            mainPanel.remove(boardPanel);
+            frame.getContentPane().remove(mainPanel);
+            frame.getContentPane().remove(buttonPanel);
+            revalidate();
+            repaint();
+        }
+        if (questionsAnswered < 2) {
             boardPanel.setBackground(background);
             hasClicked = false;
-            System.out.println("hämtar frågor, counter "+counter);
-            if(counter>0) {
-                question = questionsAndAnswers.getQuestion(currentCategory, counter, false);
-            }else{
-                question = questionsAndAnswers.getQuestion(currentCategory, counter, true);
-            }
+            System.out.println("hämtar frågor, counter "+ questionsAnswered);
+            question = questionsAndAnswers.getQuestion(currentCategory, questionsAnswered, true);
             buttonPanel = new JPanel();
             buttonPanel.setLayout(new GridLayout(0, 5));
             buttonPanel.add(giveUp);
@@ -130,18 +134,30 @@ public class PlayerClient extends JFrame implements ActionListener {
                         answerButtonList.add(button4);
                     }
                 }
-                mainPanel.add(messageLabel);
-                mainPanel.add(boardPanel);
-                frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
-                frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
-                pack();
             }
+            questionsAnswered++;
+            mainPanel.add(messageLabel);
+            mainPanel.add(boardPanel);
+            frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
+            frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
+            revalidate();
+            repaint();
         }else{
-            System.out.println("Slut på frågor");
+            questionsAnswered = 0;
+            roundsPlayed++;
+            chooseCategory();
         }
     }
 
     void chooseCategory(){
+        if(roundsPlayed > 0){
+            mainPanel.remove(messageLabel);
+            mainPanel.remove(boardPanel);
+            frame.getContentPane().remove(mainPanel);
+            frame.getContentPane().remove(buttonPanel);
+            revalidate();
+            repaint();
+        }
         mainPanel.remove(newGame);
         mainPanel.remove(findPlayerButton);
         mainPanel.remove(randomPlayerButton);
@@ -191,16 +207,18 @@ public class PlayerClient extends JFrame implements ActionListener {
                             setLabelText("Rätt svar! Bra jobbat");
                             hasClicked = true;
                             colorButtons();
-                            counter = counter +1;
-                            System.out.println("Counter är " + counter);
+                            //questionsAnswered = questionsAnswered +1;
+                            System.out.println("Antal rundor spelade är " + roundsPlayed);
+                            System.out.println("Antal frågor svarade på är " + questionsAnswered);
                             Thread.sleep(3000);
                             gameState();
                         } else if (stringResponse.startsWith("INKORREKT")) {
                             setLabelText("Fel svar!");
                             hasClicked = true;
                             colorButtons();
-                            counter = counter +1;
-                            System.out.println("Counter är " + counter);
+                            //questionsAnswered = questionsAnswered +1;
+                            System.out.println("Antal rundor spelade är " + roundsPlayed);
+                            System.out.println("Antal frågor svarade på är " + questionsAnswered);
                             Thread.sleep(3000);
                             gameState();
                         } else if (stringResponse.startsWith("VINST")) {
@@ -327,8 +345,6 @@ public class PlayerClient extends JFrame implements ActionListener {
         public static void main (String[]args) throws IOException, InterruptedException {
             while (true) {
                 System.out.println("Client är igång");
-                Question question = new Question("Vad är Sveriges huvudstad?", "Göteborg", "Malmö", "" +
-                        "Sälen", "Stockholm");
                 String serverAddress = (args.length == 0) ? "localhost" : args[1];
                 PlayerClient playerClient = new PlayerClient(serverAddress);
                 playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

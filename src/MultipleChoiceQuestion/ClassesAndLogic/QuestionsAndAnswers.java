@@ -11,6 +11,8 @@ public class QuestionsAndAnswers {
     //TODO Gör att det är questionLists och gör en getcurrentquestion som använder getcurrentcategory för att hidda den
     Question question1;
     Question question2;
+    Question fillerQuestion1;
+    Question fillerQuestion2;
     String currentCategory;
     boolean isShuffled = false;
     int index;
@@ -31,6 +33,8 @@ public class QuestionsAndAnswers {
                     sportAnswers1().get(1), sportAnswers1().get(2), sportAnswers1().get(3)));
             sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers2().get(0), sportAnswers2().get(1),
                     sportAnswers2().get(2), sportAnswers2().get(3)));
+            sport.add(fillerQuestion1 = new Question("Vi har inte skrivit såhär många frågor","Ajaj","Ojoj","Tjolahopp","Trevligt"));
+            sport.add(fillerQuestion2 = new Question("Varför fortstätter du? Vi har inte skrivit så många frågor!","1","2","3","4"));
             return sport;
         }
         public ArrayList<String> sportAnswers1 () {
@@ -55,6 +59,8 @@ public class QuestionsAndAnswers {
                     , historyAnswers1().get(1), historyAnswers1().get(2), historyAnswers1().get(3)));
             history.add(question2 = new Question("Hur dog Hitler?", historyAnswers2().get(0), historyAnswers2().get(1)
                     , historyAnswers2().get(2), historyAnswers2().get(3)));
+            history.add(fillerQuestion1 = new Question("Vi har inte skrivit såhär många frågor","Ajaj","Ojoj","Tjolahopp","Trevligt"));
+            history.add(fillerQuestion2 = new Question("Varför fortstätter du? Vi har inte skrivit så många frågor!","1","2","3","4"));
             return history;
         }
 
@@ -80,6 +86,8 @@ public class QuestionsAndAnswers {
                     , movieAnswers1().get(1), movieAnswers1().get(2), movieAnswers1().get(3)));
             math.add(question2 = new Question("Från vilken film kommer citatet  \" Say hello to my little friend \"  ",
                     movieAnswers2().get(0), movieAnswers2().get(1), movieAnswers2().get(2), movieAnswers2().get(3)));
+            math.add(fillerQuestion1 = new Question("Vi har inte skrivit såhär många frågor","Ajaj","Ojoj","Tjolahopp","Trevligt"));
+            math.add(fillerQuestion2 = new Question("Varför fortstätter du? Vi har inte skrivit så många frågor!","1","2","3","4"));
             return math;
         }
 
@@ -105,6 +113,8 @@ public class QuestionsAndAnswers {
                     , bodyAnswers1().get(1), bodyAnswers1().get(2), bodyAnswers1().get(3)));
             human.add(question2 = new Question("Vilken funktion fyller amygdala", bodyAnswers2().get(0)
                     , bodyAnswers2().get(1), bodyAnswers2().get(2), bodyAnswers2().get(3)));
+            human.add(fillerQuestion1 = new Question("Vi har inte skrivit såhär många frågor","Ajaj","Ojoj","Tjolahopp","Trevligt"));
+            human.add(fillerQuestion2 = new Question("Varför fortstätter du? Vi har inte skrivit så många frågor!","1","2","3","4"));
             return human;
         }
 
@@ -130,6 +140,8 @@ public class QuestionsAndAnswers {
                     javaAnswers1().get(1), javaAnswers1().get(2), javaAnswers1().get(3)));
             java.add(question2 = new Question("Hur adderar du kommentarer till din java-kod?", javaAnswers2().get(0),
                     javaAnswers2().get(1), javaAnswers2().get(2), javaAnswers2().get(3)));
+            java.add(fillerQuestion1 = new Question("Vi har inte skrivit såhär många frågor","Ajaj","Ojoj","Tjolahopp","Trevligt"));
+            java.add(fillerQuestion2 = new Question("Varför fortstätter du? Vi har inte skrivit så många frågor!","1","2","3","4"));
             return java;
         }
         public ArrayList<String> javaAnswers1 () {
