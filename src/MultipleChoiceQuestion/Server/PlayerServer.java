@@ -75,7 +75,6 @@ public class PlayerServer extends Thread{
             while(true){
                  userCommand = inputHandler.readObject();
                 System.out.println("userCommand "+userCommand);
-                //boolean isCorrect = false;
                 if(userCommand instanceof Answer clickedAnswer){
                     if (clickedAnswer.checkIfCorrect()){
                         outputHandler.writeObject("KORREKT");
@@ -91,6 +90,22 @@ public class PlayerServer extends Thread{
                     }
                 }else if(userCommand.equals("AVSLUT")){
                     return;
+                }else if(userCommand.equals("NEW_GAME")){
+                    if(player==1){
+                        outputHandler.writeObject("CATEGORY");
+                    } else{
+                        outputHandler.writeObject("VÄNTA");
+                    }
+                }else if(userCommand.equals("Sport")){
+                    outputHandler.writeObject("KÖR_SPORT");
+                }else if(userCommand.equals("Historia")){
+                    outputHandler.writeObject("KÖR_HISTORIA");
+                }else if(userCommand.equals("Film")){
+                    outputHandler.writeObject("KÖR_FILM");
+                }else if(userCommand.equals("Människokroppen")){
+                    outputHandler.writeObject("KÖR_MÄNNISKOKROPPEN");
+                }else if(userCommand.equals("Java")){
+                    outputHandler.writeObject("KÖR_JAVA");
                 }
             }
         } catch (IOException e) {
@@ -107,7 +122,4 @@ public class PlayerServer extends Thread{
             }
         }
     }
-
-
-
 }
