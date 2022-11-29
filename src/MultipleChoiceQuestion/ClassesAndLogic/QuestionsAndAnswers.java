@@ -4,13 +4,16 @@ package MultipleChoiceQuestion.ClassesAndLogic;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class QuestionsAndAnswers {
 
-    //TODO felsök erroret där de inte visar ifall man svarar rätt eller inte.
+    //TODO Gör att det är questionLists och gör en getcurrentquestion som använder getcurrentcategory för att hidda den
     Question question1;
     Question question2;
     String currentCategory;
+    boolean isShuffled = false;
+    int index;
 
         public ArrayList<JButton> listOfCategories () {
             ArrayList<JButton> list = new ArrayList<>();
@@ -28,7 +31,6 @@ public class QuestionsAndAnswers {
                     sportAnswers1().get(1), sportAnswers1().get(2), sportAnswers1().get(3)));
             sport.add(question2 = new Question("Vem fick guldbollen 2021?", sportAnswers2().get(0), sportAnswers2().get(1),
                     sportAnswers2().get(2), sportAnswers2().get(3)));
-            shuffleList(sport);
             return sport;
         }
         public ArrayList<String> sportAnswers1 () {
@@ -53,7 +55,6 @@ public class QuestionsAndAnswers {
                     , historyAnswers1().get(1), historyAnswers1().get(2), historyAnswers1().get(3)));
             history.add(question2 = new Question("Hur dog Hitler?", historyAnswers2().get(0), historyAnswers2().get(1)
                     , historyAnswers2().get(2), historyAnswers2().get(3)));
-            shuffleList(history);
             return history;
         }
 
@@ -79,7 +80,6 @@ public class QuestionsAndAnswers {
                     , movieAnswers1().get(1), movieAnswers1().get(2), movieAnswers1().get(3)));
             math.add(question2 = new Question("Från vilken film kommer citatet  \" Say hello to my little friend \"  ",
                     movieAnswers2().get(0), movieAnswers2().get(1), movieAnswers2().get(2), movieAnswers2().get(3)));
-            shuffleList(math);
             return math;
         }
 
@@ -105,7 +105,6 @@ public class QuestionsAndAnswers {
                     , bodyAnswers1().get(1), bodyAnswers1().get(2), bodyAnswers1().get(3)));
             human.add(question2 = new Question("Vilken funktion fyller amygdala", bodyAnswers2().get(0)
                     , bodyAnswers2().get(1), bodyAnswers2().get(2), bodyAnswers2().get(3)));
-            shuffleList(human);
             return human;
         }
 
@@ -131,7 +130,6 @@ public class QuestionsAndAnswers {
                     javaAnswers1().get(1), javaAnswers1().get(2), javaAnswers1().get(3)));
             java.add(question2 = new Question("Hur adderar du kommentarer till din java-kod?", javaAnswers2().get(0),
                     javaAnswers2().get(1), javaAnswers2().get(2), javaAnswers2().get(3)));
-            shuffleList(java);
             return java;
         }
         public ArrayList<String> javaAnswers1 () {
@@ -153,20 +151,21 @@ public class QuestionsAndAnswers {
         public void shuffleList (ArrayList list){
             Collections.shuffle(list);
         }
-        public Question getQuestion (String currentCategory){
+        public Question getQuestion (String currentCategory, int index,boolean isShuffled){
             this.currentCategory = currentCategory;
+            this.index = index;
+            this.isShuffled = isShuffled;
             if (currentCategory.equals("Sport")) {
-                question1 = sportQuestions().get(0);
+                question1 = sportQuestions().get(index);
             } else if (currentCategory.equals("Historia")) {
-                question1 = historyQuestions().get(0);
+                question1 = historyQuestions().get(index);
             } else if (currentCategory.equals("Film")) {
-                question1 = movieQuestions().get(0);
+                question1 = movieQuestions().get(index);
             } else if (currentCategory.equals("Människokroppen")) {
-                question1 = humanBodyQuestions().get(0);
+                question1 = humanBodyQuestions().get(index);
             } else {
-                question1 = javaQuestions().get(0);
+                question1 = javaQuestions().get(index);
             }
             return question1;
         }
-    }
-
+}
