@@ -220,8 +220,13 @@ public class PlayerClient extends JFrame implements ActionListener {
                             StartMenu();
                         } else if(stringResponse.startsWith("CATEGORY")){
                             chooseCategory();
+                            outputHandler.writeObject("category recieved");
+                            outputHandler.reset();
                         }else if(stringResponse.contains("VÄNTA")){
                             System.out.println("Din motståndare väljer kategori.");
+                            //Thread.sleep(10000);
+                            outputHandler.writeObject("vänta recieved");
+                            outputHandler.reset();
                         }
                         else if(stringResponse.startsWith("KÖR")){
                             mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
