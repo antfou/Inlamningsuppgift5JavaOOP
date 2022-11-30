@@ -1,17 +1,21 @@
 package MultipleChoiceQuestion.Client;
 //Feature Branch
 
-import MultipleChoiceQuestion.ClassesAndLogic.*;
+import MultipleChoiceQuestion.ClassesAndLogic.Answer;
+import MultipleChoiceQuestion.ClassesAndLogic.Database;
+import MultipleChoiceQuestion.ClassesAndLogic.Question;
+import MultipleChoiceQuestion.ClassesAndLogic.QuestionsAndAnswers;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class PlayerClient extends JFrame  implements ActionListener {
+public class PlayerClient extends JFrame implements ActionListener {
     int counter = 0;
     String userName;
     ArrayList<String> playerListAtClient;
@@ -49,9 +53,8 @@ public class PlayerClient extends JFrame  implements ActionListener {
     JLabel jLabel = new JLabel();
 
     Question question;
-    public PlayerClient(String serverAddress){
-        this.question = question;
-        try{
+    public PlayerClient(String serverAddress) {
+        try {
             socket = new Socket(serverAddress, PORT);
             outputHandler = new ObjectOutputStream(socket.getOutputStream());
             inputHandler = new ObjectInputStream(socket.getInputStream());
@@ -59,13 +62,14 @@ public class PlayerClient extends JFrame  implements ActionListener {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+    public void StartMenu(){
 
         frame.getContentPane().add(messageLabel,BorderLayout.NORTH);
 
         //TODO label ska slumpa fram fråga från användarens valda kategori
         //Bara för test nu.
         setLabelText("Quizkampen");
-
 
         boardPanel = new JPanel();
         mainPanel = new JPanel();
@@ -208,12 +212,10 @@ public class PlayerClient extends JFrame  implements ActionListener {
 
     }
 
-
-
         public void play () throws IOException, InterruptedException {
             Object serverResponse;
             try {
-                while (true) {  //om inte funkar, ändra till true
+                while (true) {
                     serverResponse = inputHandler.readObject();
                     if (serverResponse instanceof String stringResponse) {
                         System.out.println("client reading " + stringResponse);
@@ -252,6 +254,31 @@ public class PlayerClient extends JFrame  implements ActionListener {
                         } else if (stringResponse.startsWith("START")) {
                             JOptionPane.showMessageDialog(null,
                                     "Hittat motståndare, snart börjar matchen.");
+                            StartMenu();
+                        } else if(stringResponse.startsWith("CATEGORY")){
+                            chooseCategory();
+                            outputHandler.writeObject("category recieved");
+                            outputHandler.reset();
+                        }else if(stringResponse.contains("VÄNTA")){
+                            System.out.println("Din motståndare väljer kategori.");
+                            //Thread.sleep(10000);
+                            outputHandler.writeObject("vänta recieved");
+                            outputHandler.reset();
+                        }
+                        else if(stringResponse.startsWith("KÖR")){
+                            mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                            gameState();
+                            if(stringResponse.contains("SPORT")){
+                                currentCategory = "Sport";
+                            }else if(stringResponse.contains("HISTORIA")){
+                                currentCategory = "Historia";
+                            }else if(stringResponse.contains("FILM")){
+                                currentCategory = "Film";
+                            }else if(stringResponse.contains("JAVA")){
+                                currentCategory = "Java";
+                            }else if(stringResponse.contains("MÄNNISKOKROPPEN")){
+                                currentCategory = "Människokroppen";
+                            }
                         }
                     }  if (serverResponse instanceof ArrayList<?> playerList) {
                         playerListAtClient = (ArrayList<String>) playerList;
@@ -304,7 +331,12 @@ public class PlayerClient extends JFrame  implements ActionListener {
                 //chooseCategory();
             }
             if (e.getSource() == randomPlayerButton) {
-                chooseCategory();
+                try {
+                    outputHandler.writeObject("NEW_GAME");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                //chooseCategory();
             }
             if (e.getSource() == findPlayerButton) {
                 findPlayerButtonPressed();
@@ -313,24 +345,29 @@ public class PlayerClient extends JFrame  implements ActionListener {
                 if (e.getSource() == button) {
                     if (button.getText().equals("Sport")) {
                         currentCategory = "Sport";
-                        mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
-                        gameState();
+                        //mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                       // gameState();
                     } else if (button.getText().equals("Historia")) {
                         currentCategory = "Historia";
-                        mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
-                        gameState();
+                      //  mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                      //  gameState();
                     } else if (button.getText().equals("Film")) {
                         currentCategory = "Film";
-                        mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
-                        gameState();
+                      //  mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                      //  gameState();
                     } else if (button.getText().equals("Människokroppen")) {
                         currentCategory = "Människokroppen";
-                        mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
-                        gameState();
+                      //  mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                      //  gameState();
                     } else {
                         currentCategory = "Java";
-                        mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
-                        gameState();
+                       // mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
+                      //  gameState();
+                    }
+                    try {
+                        outputHandler.writeObject(currentCategory);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
             }
@@ -363,20 +400,15 @@ public class PlayerClient extends JFrame  implements ActionListener {
                 }
             }
         }
-        public static void main (String[]args) throws IOException, InterruptedException {
-            while (true) {
-                System.out.println("Client är igång");
-                Question question = new Question("Vad är Sveriges huvudstad?", "Göteborg", "Malmö", "" +
-                        "Sälen", "Stockholm");
-                String serverAddress = (args.length == 0) ? "localhost" : args[1];
-                PlayerClient playerClient = new PlayerClient(serverAddress);
-                playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                //playerClient.frame.setSize(400, 200);
-                playerClient.frame.setVisible(true);
-                playerClient.play();
-                if (!playerClient.rematch()) {
-                    break;
-                }
-            }
-        }
+    public static void main (String[]args) throws IOException, InterruptedException {
+        System.out.println("Client är igång");
+        String serverAddress = "LocalHost";
+        PlayerClient playerClient = new PlayerClient(serverAddress);
+        playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        playerClient.frame.setSize(400, 200);
+        playerClient.frame.setVisible(true);
+        playerClient.play();
+
     }
+}
+
