@@ -1,12 +1,7 @@
 package MultipleChoiceQuestion.Client;
 //Feature Branch
 
-import MultipleChoiceQuestion.ClassesAndLogic.Answer;
-import MultipleChoiceQuestion.ClassesAndLogic.Database;
-import MultipleChoiceQuestion.ClassesAndLogic.Player;
-import MultipleChoiceQuestion.ClassesAndLogic.Question;
-import MultipleChoiceQuestion.ClassesAndLogic.QuestionsAndAnswers;
-import MultipleChoiceQuestion.Server.PlayerServer;
+import MultipleChoiceQuestion.ClassesAndLogic.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +11,15 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class PlayerClient extends JFrame implements ActionListener {
+public class PlayerClient extends JFrame  implements ActionListener {
     int counter = 0;
     String userName;
-    Database db;
+    ArrayList<String> playerListAtClient;
     boolean hasClicked = false;
     String currentCategory;
+    private JButton jcomp1 = new JButton ("Log In");
+    private JButton jcomp3 = new JButton ("Play as Guest");
+    private JButton jcomp2 = new JButton ("New User");
     private JButton newGame = new JButton("NYTT SPEL");
     private JButton giveUp = new JButton("Ge upp");
     private JFrame frame = new JFrame("QUIZ");
@@ -42,10 +40,14 @@ public class PlayerClient extends JFrame implements ActionListener {
     private ObjectOutputStream outputHandler;
     private ArrayList<JButton> categories = new ArrayList<>();
     private ArrayList<JButton> answerButtonList = new ArrayList<>();
+    private int frameSize = 100;
     QuestionsAndAnswers questionsAndAnswers = new QuestionsAndAnswers();
     Color background = new Color(51,154,255);
     Color purple = new Color(178,102,255);
     Color button = new Color(0,204,0);
+    ImageIcon img = new ImageIcon("src/MultipleChoiceQuestion/ClassesAndLogic/template.png");
+    JLabel jLabel = new JLabel();
+
     Question question;
     public PlayerClient(String serverAddress){
         this.question = question;
@@ -64,16 +66,32 @@ public class PlayerClient extends JFrame implements ActionListener {
         //Bara för test nu.
         setLabelText("Quizkampen");
 
+
         boardPanel = new JPanel();
         mainPanel = new JPanel();
-        mainPanel.setBackground(background);
+        mainPanel.add(newGame);
+        /*mainPanel.setBackground(background);
         newGame.setBackground(button);
         newGame.setForeground(Color.white);
         mainPanel.setLayout(new GridLayout(3,1));
-        mainPanel.add(messageLabel);
-        mainPanel.add(newGame);
+        */
+        mainPanel.add(jLabel);
+        jLabel.setIcon(img);
+        frame.setPreferredSize (new Dimension (frameSize*4, frameSize*6));
+        mainPanel.setLayout(null);
+        jcomp1.setBounds (frameSize*4/3, frameSize*2, 155, 55);
+        jcomp2.setBounds (frameSize*4/3, frameSize*6/2, 155, 55);
+        jcomp3.setBounds (frameSize*4/3, frameSize*5, 155, 55);
+        mainPanel.add(jcomp1);
+        mainPanel.add(jcomp2);
+        mainPanel.add(jcomp3);
         frame.add(mainPanel);
+        frame.setResizable(false);
+        //mainPanel.add(messageLabel);
         newGame.addActionListener(this);
+        frame.pack();
+        paint(getGraphics());
+
     }
 
     public void gameState() {
@@ -138,6 +156,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                 frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
                 frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
                 pack();
+                //TODO paint(getGraphics()); TESTA DENNA!!!!!
             }
         }else{
             System.out.println("Slut på frågor");
@@ -177,7 +196,7 @@ public class PlayerClient extends JFrame implements ActionListener {
     }
 
     void findPlayerButtonPressed(){
-
+        playerListAtClient.forEach(System.out::println);
         //buttons = new JButton[db.getListOfPlayers().size()];
         mainPanel.remove(newGame);
         mainPanel.repaint();
@@ -189,16 +208,22 @@ public class PlayerClient extends JFrame implements ActionListener {
 
     }
 
+
+
         public void play () throws IOException, InterruptedException {
             Object serverResponse;
             try {
-                while (true) {
+                while (true) {  //om inte funkar, ändra till true
                     serverResponse = inputHandler.readObject();
                     if (serverResponse instanceof String stringResponse) {
                         System.out.println("client reading " + stringResponse);
                         if (stringResponse.startsWith("WELCOME")) {
                             userName = stringResponse.substring(8);
                             frame.setTitle("Spelare: " + userName);
+                            //outputHandler.writeObject("");
+                            //High risk cast
+
+
                         } else if (stringResponse.startsWith("KORREKT")) {
                             setLabelText("Rätt svar! Bra jobbat");
                             hasClicked = true;
@@ -228,6 +253,8 @@ public class PlayerClient extends JFrame implements ActionListener {
                             JOptionPane.showMessageDialog(null,
                                     "Hittat motståndare, snart börjar matchen.");
                         }
+                    }  if (serverResponse instanceof ArrayList<?> playerList) {
+                        playerListAtClient = (ArrayList<String>) playerList;
                     }//TODO: Lista ut vad du vill göra med detta.
                     //outputHandler.writeObject("AVSLUT");
                 }
@@ -344,7 +371,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                 String serverAddress = (args.length == 0) ? "localhost" : args[1];
                 PlayerClient playerClient = new PlayerClient(serverAddress);
                 playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                playerClient.frame.setSize(400, 200);
+                //playerClient.frame.setSize(400, 200);
                 playerClient.frame.setVisible(true);
                 playerClient.play();
                 if (!playerClient.rematch()) {
