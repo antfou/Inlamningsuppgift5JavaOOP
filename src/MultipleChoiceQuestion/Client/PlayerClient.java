@@ -78,12 +78,11 @@ public class PlayerClient extends JFrame implements ActionListener {
         mainPanel.setBackground(background);
         newGame.setBackground(button);
         newGame.setForeground(Color.white);
-        mainPanel.setLayout(new GridLayout(3,1));
+        newGame.setBounds (frameSize*4/3, frameSize*2, 155, 55);
+        //mainPanel.setLayout(new GridLayout(3,1));
 
         /*mainPanel.add(jLabel);
         jLabel.setIcon(img);
-        frame.setPreferredSize (new Dimension (frameSize*4, frameSize*6));
-        mainPanel.setLayout(null);
         jcomp1.setBounds (frameSize*4/3, frameSize*2, 155, 55);
         jcomp2.setBounds (frameSize*4/3, frameSize*6/2, 155, 55);
         jcomp3.setBounds (frameSize*4/3, frameSize*5, 155, 55);
@@ -92,17 +91,23 @@ public class PlayerClient extends JFrame implements ActionListener {
         mainPanel.add(jcomp3);
         */
 
+        mainPanel.setLayout(null);
+        frame.setPreferredSize (new Dimension (frameSize*4, frameSize*6));
         frame.add(mainPanel);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         //mainPanel.add(messageLabel);
         newGame.addActionListener(this);
-        //frame.pack();
-        //paint(getGraphics());
+        frame.pack();
+        paint(getGraphics());
 
     }
 
     public void gameState() {
         if (counter < 2) {
+            mainPanel.remove(newGame);
+            mainPanel.remove(findPlayerButton);
+            mainPanel.remove(randomPlayerButton);
+            mainPanel.repaint();
             removeAll();
             boardPanel.setBackground(background);
             hasClicked = false;
@@ -113,10 +118,11 @@ public class PlayerClient extends JFrame implements ActionListener {
                 question = questionsAndAnswers.getQuestion(currentCategory, counter, true);
             }
             buttonPanel = new JPanel();
-            buttonPanel.setLayout(new GridLayout(0, 5));
+            //buttonPanel.setLayout(new GridLayout(0, 5));
             buttonPanel.add(giveUp);
             giveUp.addActionListener(this);
             giveUp.setBackground(Color.white);
+            giveUp.setBounds (frameSize, frameSize, 155, 55);;
             buttonPanel.setBackground(background);
             setLabelText(question.getQuestionText());
             System.out.println("Hämtat från databas: " + question.getQuestionText());
@@ -162,9 +168,8 @@ public class PlayerClient extends JFrame implements ActionListener {
                 mainPanel.add(boardPanel);
                 frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
                 frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
-                pack();
+                frame.pack();
                 paint(getGraphics());
-                //TODO paint(getGraphics()); TESTA DENNA!!!!!
             }
         }else{
             System.out.println("Slut på frågor");
@@ -172,13 +177,14 @@ public class PlayerClient extends JFrame implements ActionListener {
     }
 
     void chooseCategory(){
+        removeAll();
         mainPanel.remove(newGame);
         mainPanel.remove(findPlayerButton);
         mainPanel.remove(randomPlayerButton);
         mainPanel.repaint();
         setLabelText("Välj kategori");
         categories = questionsAndAnswers.listOfCategories();
-        mainPanel.setLayout(new GridLayout(4,1));
+        //mainPanel.setLayout(new GridLayout(4,1));
         mainPanel.add(messageLabel);
         for(JButton button: categories){
             button.addActionListener(this);
@@ -186,20 +192,27 @@ public class PlayerClient extends JFrame implements ActionListener {
         categories.get(0).setBackground(Color.ORANGE); categories.get(0).setForeground(Color.white);
         categories.get(1).setBackground(purple); categories.get(1).setForeground(Color.white);
         categories.get(2).setBackground(Color.GREEN.darker()); categories.get(2).setForeground(Color.white);
-        mainPanel.add(categories.get(0));
-        mainPanel.add(categories.get(1));
-        mainPanel.add(categories.get(2));
+        mainPanel.add(categories.get(0)).setBounds (frameSize*4/3, frameSize*2, 155, 55);;
+        mainPanel.add(categories.get(1)).setBounds (frameSize*4/3, frameSize*3, 155, 55);;
+        mainPanel.add(categories.get(2)).setBounds (frameSize*4/3, frameSize*4, 155, 55);;
+        frame.pack();
+        paint(getGraphics());
+
     }
 
     void chooseRandomPlayerOrFindPlayer(){
         mainPanel.remove(newGame);
         mainPanel.repaint();
         setLabelText("");
-        mainPanel.setLayout(new FlowLayout());
+        //mainPanel.setLayout(new FlowLayout());
         mainPanel.add(findPlayerButton);
         mainPanel.add(randomPlayerButton);
+        findPlayerButton.setBounds (frameSize*4/3, frameSize*2, 155, 55);
+        randomPlayerButton.setBounds (frameSize*4/3, frameSize*3, 155, 55);
         findPlayerButton.addActionListener(this);
         randomPlayerButton.addActionListener(this);
+        frame.pack();
+        paint(getGraphics());
 
     }
 
@@ -428,7 +441,7 @@ public class PlayerClient extends JFrame implements ActionListener {
         String serverAddress = "LocalHost";
         PlayerClient playerClient = new PlayerClient(serverAddress);
         playerClient.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        playerClient.frame.setSize(400, 200);
+        //playerClient.frame.setSize(400, 200);
         playerClient.frame.setVisible(true);
         playerClient.play();
 
