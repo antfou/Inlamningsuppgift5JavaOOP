@@ -6,6 +6,7 @@ import MultipleChoiceQuestion.ClassesAndLogic.Database;
 import MultipleChoiceQuestion.ClassesAndLogic.Question;
 import MultipleChoiceQuestion.ClassesAndLogic.QuestionsAndAnswers;
 
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -74,12 +75,12 @@ public class PlayerClient extends JFrame implements ActionListener {
         boardPanel = new JPanel();
         mainPanel = new JPanel();
         mainPanel.add(newGame);
-        /*mainPanel.setBackground(background);
+        mainPanel.setBackground(background);
         newGame.setBackground(button);
         newGame.setForeground(Color.white);
         mainPanel.setLayout(new GridLayout(3,1));
-        */
-        mainPanel.add(jLabel);
+
+        /*mainPanel.add(jLabel);
         jLabel.setIcon(img);
         frame.setPreferredSize (new Dimension (frameSize*4, frameSize*6));
         mainPanel.setLayout(null);
@@ -89,12 +90,14 @@ public class PlayerClient extends JFrame implements ActionListener {
         mainPanel.add(jcomp1);
         mainPanel.add(jcomp2);
         mainPanel.add(jcomp3);
+        */
+
         frame.add(mainPanel);
-        frame.setResizable(false);
+        //frame.setResizable(false);
         //mainPanel.add(messageLabel);
         newGame.addActionListener(this);
-        frame.pack();
-        paint(getGraphics());
+        //frame.pack();
+        //paint(getGraphics());
 
     }
 
@@ -160,6 +163,7 @@ public class PlayerClient extends JFrame implements ActionListener {
                 frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
                 frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
                 pack();
+                paint(getGraphics());
                 //TODO paint(getGraphics()); TESTA DENNA!!!!!
             }
         }else{
@@ -261,15 +265,34 @@ public class PlayerClient extends JFrame implements ActionListener {
                             outputHandler.reset();
                         }else if(stringResponse.contains("VÄNTA")){
                             System.out.println("Din motståndare väljer kategori.");
-                            //Thread.sleep(10000);
-                            outputHandler.writeObject("vänta recieved");
-                            outputHandler.reset();
-                        }
-                        else if(stringResponse.startsWith("KÖR")){
+                           // outputHandler.writeObject("waiting");
+                            Thread.sleep(7000);
+                            System.out.println("nu har jag väntat klart");
+                                //outputHandler.writeObject("GET");
+                                outputHandler.reset();
+
+                        }else if (stringResponse.contains("mjau")){
+                            BufferedReader in = new BufferedReader(new FileReader("src/MultipleChoiceQuestion/Server/PlayerList.txt"));
+                            String contentLine = in.readLine();
+                            while (contentLine != null) {
+                                System.out.println("hämtade: " + contentLine + " från serverfilen");
+                                outputHandler.writeObject(contentLine);
+                                currentCategory = contentLine;
+                                System.out.println("skrev ut: " + contentLine);
+                                contentLine = in.readLine();
+                                in.close();
+                            }
+                                gameState();
+                                System.out.println("skiten funkar");
+
+
+                        } else if(stringResponse.startsWith("KÖR")){
                             mainPanel.remove(categories.get(0));mainPanel.remove(categories.get(1));mainPanel.remove(categories.get(2));
                             gameState();
+                            outputHandler.writeObject("GET");
                             if(stringResponse.contains("SPORT")){
                                 currentCategory = "Sport";
+                                outputHandler.writeObject("testarSPORT");
                             }else if(stringResponse.contains("HISTORIA")){
                                 currentCategory = "Historia";
                             }else if(stringResponse.contains("FILM")){

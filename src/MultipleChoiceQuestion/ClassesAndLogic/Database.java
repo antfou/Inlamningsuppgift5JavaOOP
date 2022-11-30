@@ -7,10 +7,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Database {
-    private final ArrayList<Player> playerNameList = new ArrayList<>();
+    private final ArrayList<String> playerNameList = new ArrayList<>();
 
-    public void addPlayerToList(Player player) {
-        playerNameList.add(new Player(player.getUserName()));
+    public void addPlayerToList(String player) {
+        playerNameList.add(player);
         //Ska vara utkommenterat tills vidare.
         /*File file = new File("src/MultipleChoiceQuestion/Server/Database/PlayerList.txt");    //Om vi vill ha en login
         try {
@@ -22,14 +22,14 @@ public class Database {
             throw new RuntimeException(e);
         }*/
     }
-    public ArrayList<Player> getListOfPlayers(){
+    public ArrayList<String> getListOfPlayers(){
         return playerNameList;
     }
 
-    public Player searchPlayer(String searchName){
-        Player playerFound = null;                 //om koden används, lägg in "if null blablabla"
-        for (Player players : playerNameList){
-            if (players.getUserName().replaceAll("\s", "" ).equalsIgnoreCase(searchName)){
+    public String searchPlayer(String searchName){
+        String playerFound = "";                 //om koden används, lägg in "if null blablabla"
+        for (String players : playerNameList){
+            if (players.replaceAll("\s", "" ).equalsIgnoreCase(searchName)){
                 System.out.println("Hittade Spelare: " + players);
                 return players;
             }

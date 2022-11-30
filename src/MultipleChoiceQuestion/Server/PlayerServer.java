@@ -17,12 +17,13 @@ public class PlayerServer extends Thread{
     String name;
     GameServer game;
     PlayerServer opponent;
+    PlayerServer currentPlayer;
     Socket socket;
     ObjectInputStream inputHandler;
     ObjectOutputStream outputHandler;
+    String kategori = "";
     int player;
     int score;
-
     public PlayerServer(Socket socket, GameServer game,Database db, int player, int score) throws IOException {
         this.db = db;
         System.out.println("PlayerServer är igång");
@@ -31,9 +32,9 @@ public class PlayerServer extends Thread{
         this.player = player;
         this.score=score;
         name = JOptionPane.showInputDialog("Vem vill spela?");
-        this.db.addPlayerToList(new Player(name));
-        for (Player p : db.getListOfPlayers()) {
-            System.out.println(p.getUserName() + " tillagd i listan 'online spelare'");
+        this.db.addPlayerToList(name);
+        for (String p : db.getListOfPlayers()) {
+            System.out.println(p + " tillagd i listan 'online spelare'");
         }
         outputHandler = new ObjectOutputStream(socket.getOutputStream());
         inputHandler = new ObjectInputStream(socket.getInputStream());
@@ -94,25 +95,47 @@ public class PlayerServer extends Thread{
                 }else if(userCommand.equals("AVSLUT")){
                     return;
                 }else if(userCommand.equals("NEW_GAME")){
-                    if(player==1){
-                        outputHandler.writeObject("CATEGORY");
-                    } else{
-                        outputHandler.writeObject("VÄNTA");
+                        if (player == 1) {
+                            outputHandler.writeObject("CATEGORY");
+                            outputHandler.reset();
+                        } if (player == 2) {
+                            outputHandler.writeObject("VÄNTA");
+                            Thread.sleep(5000);
+                            outputHandler.writeObject("mjau");
                     }
+
+                } else if(userCommand.equals("GET")) {
+                    File file = new File("src/MultipleChoiceQuestion/Server/PlayerList.txt");    //Om vi vill ha en login
+                    try {
+                        FileWriter myWriter = new FileWriter(file, false);
+                        myWriter.write(kategori);
+                        myWriter.close();
+                        System.out.println("Sparade: " + kategori + "till servern");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    /*outputHandler.writeObject(kategori);
+                    System.out.println("detta är katogrin på server" + kategori);*/
+
                 }else if(userCommand.equals("Sport")){
                     outputHandler.writeObject("KÖR_SPORT");
+                    kategori = "Sport";
                     outputHandler.reset();
                 }else if(userCommand.equals("Historia")){
                     outputHandler.writeObject("KÖR_HISTORIA");
+                    kategori = "Historia";
                     outputHandler.reset();
                 }else if(userCommand.equals("Film")){
                     outputHandler.writeObject("KÖR_FILM");
+                    kategori = "Film";
                     outputHandler.reset();
                 }else if(userCommand.equals("Människokroppen")){
                     outputHandler.writeObject("KÖR_MÄNNISKOKROPPEN");
+                    kategori = "Människokroppen";
                     outputHandler.reset();
                 }else if(userCommand.equals("Java")){
                     outputHandler.writeObject("KÖR_JAVA");
+                    kategori = "Java";
                     outputHandler.reset();
                 }
             }
@@ -120,6 +143,8 @@ public class PlayerServer extends Thread{
             e.printStackTrace();
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             try {
